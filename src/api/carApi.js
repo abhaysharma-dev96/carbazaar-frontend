@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: "https://carbazaar-backend-2a1e.onrender.com/api",
 });
 
 // Get all cars with filters
