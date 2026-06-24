@@ -2,14 +2,14 @@ import { useState } from "react";
 import {
   AppBar, Toolbar, Typography, Button, Box, Stack,
   IconButton, Drawer, List, ListItem, ListItemButton,
-  ListItemText, useMediaQuery, Container,
+  ListItemText, useMediaQuery, Container, Avatar, Menu, MenuItem,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import DirectionsCarFilledIcon from "@mui/icons-material/DirectionsCarFilled";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-
+import { useAuth } from "../../context/AuthContext";
 const navLinks = [
   { label: "Home", path: "/" },
   { label: "Browse Cars", path: "/cars" },
@@ -22,6 +22,16 @@ function Navbar() {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [drawerOpen, setDrawerOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+const { user, logout } = useAuth();
+const [anchorEl, setAnchorEl] = useState(null);
+
+const handleLogout = () => {
+  logout();
+  setAnchorEl(null);
+  navigate("/");
+};
+// console.log("Current user:", user);
 
   return (
     <>
@@ -67,6 +77,26 @@ function Navbar() {
                 >
                   Contact Us
                 </Button>
+                {user ? (
+  <>
+    <IconButton onClick={(e) => setAnchorEl(e.currentTarget)} sx={{ ml: 1 }}>
+      <Avatar sx={{ bgcolor: "#4e6ef2", width: 36, height: 36, fontSize: "0.9rem" }}>
+        {user.name.charAt(0).toUpperCase()}
+      </Avatar>
+    </IconButton>
+    <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={() => setAnchorEl(null)}>
+      <MenuItem disabled>{user.name}</MenuItem>
+       <MenuItem component={Link} to="/wishlist" onClick={() => setAnchorEl(null)}>
+  My Wishlist
+</MenuItem>
+      <MenuItem onClick={handleLogout}>Logout</MenuItem>
+    </Menu>
+  </>
+) : (
+  <Button component={Link} to="/login" sx={{ ml: 1, color: "#1e293b" }}>
+    Login
+  </Button>
+)}
               </Stack>
             )}
 
@@ -110,6 +140,27 @@ function Navbar() {
             <Button component={Link} to="/sell" variant="contained" fullWidth onClick={() => setDrawerOpen(false)}>
               Sell Your Car
             </Button>
+            {user ? (
+              <Button
+                onClick={() => { handleLogout(); setDrawerOpen(false); }}
+                variant="outlined"
+                fullWidth
+                sx={{ mt: 2 }}
+              >
+                Logout ({user.name})
+              </Button>
+            ) : (
+              <Button
+                component={Link}
+                to="/login"
+                variant="outlined"
+                fullWidth
+                sx={{ mt: 2 }}
+                onClick={() => setDrawerOpen(false)}
+              >
+                Login
+              </Button>
+            )}
           </Box>
         </Box>
       </Drawer>
