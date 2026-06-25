@@ -1,7 +1,10 @@
 import axios from "axios";
 
+// const API = axios.create({
+//   baseURL: import.meta.env.VITE_API_URL,
+// });
 const API = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: "https://carbazaar-backend-2a1e.onrender.com/api",
 });
 
 export const registerUser = async (formData) => {
