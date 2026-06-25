@@ -13,6 +13,7 @@ import { useAuth } from "../../context/AuthContext";
 const navLinks = [
   { label: "Home", path: "/" },
   { label: "Browse Cars", path: "/cars" },
+  { label: "Sell Your Car", path: "/sell" },
   { label: "Contact Us", path: "/contact" },
 ];
 
@@ -136,16 +137,6 @@ const handleLogout = () => {
             ))}
           </List>
           <Box sx={{ px: 3, mt: 2 }}>
-  <Button
-    component={Link}
-    to="/sell"
-    variant="contained"
-    fullWidth
-    onClick={() => setDrawerOpen(false)}
-  >
-    Sell Your Car
-  </Button>
-
   {user && (
     <Button
       component={Link}
