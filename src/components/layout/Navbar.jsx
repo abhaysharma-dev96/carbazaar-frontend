@@ -13,7 +13,6 @@ import { useAuth } from "../../context/AuthContext";
 const navLinks = [
   { label: "Home", path: "/" },
   { label: "Browse Cars", path: "/cars" },
-  { label: "Sell Your Car", path: "/sell" },
   { label: "Contact Us", path: "/contact" },
 ];
 
@@ -137,31 +136,54 @@ const handleLogout = () => {
             ))}
           </List>
           <Box sx={{ px: 3, mt: 2 }}>
-            <Button component={Link} to="/sell" variant="contained" fullWidth onClick={() => setDrawerOpen(false)}>
-              Sell Your Car
-            </Button>
-            {user ? (
-              <Button
-                onClick={() => { handleLogout(); setDrawerOpen(false); }}
-                variant="outlined"
-                fullWidth
-                sx={{ mt: 2 }}
-              >
-                Logout ({user.name})
-              </Button>
-            ) : (
-              <Button
-                component={Link}
-                to="/login"
-                variant="outlined"
-                fullWidth
-                sx={{ mt: 2 }}
-                onClick={() => setDrawerOpen(false)}
-              >
-                Login
-              </Button>
-            )}
-          </Box>
+  <Button
+    component={Link}
+    to="/sell"
+    variant="contained"
+    fullWidth
+    onClick={() => setDrawerOpen(false)}
+  >
+    Sell Your Car
+  </Button>
+
+  {user && (
+    <Button
+      component={Link}
+      to="/wishlist"
+      variant="outlined"
+      fullWidth
+      sx={{ mt: 2 }}
+      onClick={() => setDrawerOpen(false)}
+    >
+      My Wishlist
+    </Button>
+  )}
+
+  {user ? (
+    <Button
+      onClick={() => {
+        handleLogout();
+        setDrawerOpen(false);
+      }}
+      variant="outlined"
+      fullWidth
+      sx={{ mt: 2 }}
+    >
+      Logout ({user.name})
+    </Button>
+  ) : (
+    <Button
+      component={Link}
+      to="/login"
+      variant="outlined"
+      fullWidth
+      sx={{ mt: 2 }}
+      onClick={() => setDrawerOpen(false)}
+    >
+      Login
+    </Button>
+  )}
+</Box>
         </Box>
       </Drawer>
     </>
