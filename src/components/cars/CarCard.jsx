@@ -68,19 +68,7 @@ function CarCard({ car, wishlistIds = [] }) {
     >
       {/* Heart Icon */}
       <Box sx={{ position: "absolute", top: 8, right: 8, zIndex: 1 }}>
-       <IconButton
-  onClick={handleWishlist}
-  onTouchStart={(e) => {
-    e.preventDefault();
-    e.stopPropagation();
-  }}
-  disabled={loading}
-  sx={{
-    bgcolor: "rgba(255,255,255,0.9)",
-    "&:hover": { bgcolor: "white" },
-    p: 0.8,
-  }}
->
+  <IconButton onClick={handleWishlist} disabled={loading} sx={{ bgcolor: "rgba(255,255,255,0.9)", "&:hover": { bgcolor: "white" }, p: 0.8 }} > {isWishlisted ? <FavoriteIcon sx={{ color: "#e94560", fontSize: 20 }} /> : <FavoriteBorderIcon sx={{ color: "#64748b", fontSize: 20 }} /> }
         
         </IconButton>
       </Box>
