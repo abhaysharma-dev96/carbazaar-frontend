@@ -32,7 +32,6 @@ function App() {
         <Route path="/compare" element={<Compare />} />
       </Routes>
       <Footer />
-      <Footer />
 <CompareBar />
     </>
   );
