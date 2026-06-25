@@ -84,7 +84,7 @@ useEffect(() => {
       {/* HERO */}
       <Box
         sx={{
-          minHeight: "92vh",
+          minHeight: { xs: "65vh", md: "75vh" },
           background: "linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #1e2d6e 100%)",
           display: "flex",
           alignItems: "center",
@@ -193,6 +193,59 @@ useEffect(() => {
                   Sell Your Car
                 </Button>
               </Stack>
+              <Stack
+  direction="row"
+  spacing={4}
+  sx={{ mt: 4 }}
+>
+  <Box>
+    <Typography
+      variant="h5"
+      fontWeight={800}
+      color="white"
+    >
+      500+
+    </Typography>
+    <Typography
+      variant="body2"
+      sx={{ color: "#94a3b8" }}
+    >
+      Cars Listed
+    </Typography>
+  </Box>
+
+  <Box>
+    <Typography
+      variant="h5"
+      fontWeight={800}
+      color="white"
+    >
+      100+
+    </Typography>
+    <Typography
+      variant="body2"
+      sx={{ color: "#94a3b8" }}
+    >
+      Happy Buyers
+    </Typography>
+  </Box>
+
+  <Box>
+    <Typography
+      variant="h5"
+      fontWeight={800}
+      color="white"
+    >
+      24/7
+    </Typography>
+    <Typography
+      variant="body2"
+      sx={{ color: "#94a3b8" }}
+    >
+      Support
+    </Typography>
+  </Box>
+</Stack>
             </Grid>
 
             <Grid size={{ xs: 12, md: 6 }}>
@@ -222,25 +275,7 @@ useEffect(() => {
         </Container>
       </Box>
 
-      {/* STATS STRIP */}
-      <Box sx={{ bgcolor: "#4e6ef2", py: 3 }}>
-        <Container maxWidth="xl">
-          <Grid container justifyContent="center">
-            {stats.map((stat, i) => (
-              <Grid key={stat.label} size={{ xs: 6, sm: 3 }}
-                sx={{
-                  textAlign: "center",
-                  borderRight: i < 3 ? "1px solid rgba(255,255,255,0.2)" : "none",
-                  py: 1,
-                }}
-              >
-                <Typography variant="h5" fontWeight={800} color="white">{stat.value}</Typography>
-                <Typography variant="body2" sx={{ color: "rgba(255,255,255,0.85)" }}>{stat.label}</Typography>
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
-      </Box>
+     
 
       {/* BRANDS MARQUEE */}
       <Box sx={{ bgcolor: "#f8fafc", py: 2, overflow: "hidden", borderBottom: "1px solid #f0f0f0" }}>
@@ -266,7 +301,7 @@ useEffect(() => {
       </Box>
 
       {/* CATEGORIES */}
-      <Container maxWidth="xl" sx={{ py: 8 }}>
+      <Container maxWidth="xl" sx={{ py: 6 }}>
         <Box sx={{ textAlign: "center", mb: 6 }}>
           <Chip label="Categories" sx={{ bgcolor: "rgba(78,110,242,0.1)", color: "#4e6ef2", mb: 2 }} />
           <Typography variant="h4" fontWeight={800} gutterBottom>Browse by Category</Typography>
@@ -301,7 +336,7 @@ useEffect(() => {
       </Container>
 
       {/* FEATURED CARS */}
-     <Box sx={{ bgcolor: "#f8fafc", py: 8 }}>
+     <Box sx={{ bgcolor: "#f8fafc", py: 6 }}>
   <Container maxWidth="xl">
     <Stack direction={{ xs: "column", sm: "row" }} justifyContent="space-between" alignItems={{ sm: "center" }} sx={{ mb: 5 }}>
       <Box>
@@ -345,7 +380,7 @@ useEffect(() => {
 </Box>
 
       {/* WHY CHOOSE US */}
-      <Container maxWidth="xl" sx={{ py: 8 }}>
+      <Container maxWidth="xl" sx={{ py: 6 }}>
         <Box sx={{ textAlign: "center", mb: 6 }}>
           <Chip label="Why Us" sx={{ bgcolor: "rgba(78,110,242,0.1)", color: "#4e6ef2", mb: 2 }} />
           <Typography variant="h4" fontWeight={800} gutterBottom>Why Choose CarBazaar?</Typography>
