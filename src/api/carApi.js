@@ -1,9 +1,8 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://carbazaar-backend-2a1e.onrender.com/api",
+  baseURL: import.meta.env.VITE_API_URL,
 });
-
 // Get all cars with filters
 export const fetchCars = async (params = {}) => {
   const { data } = await API.get("/cars", { params });
