@@ -135,40 +135,38 @@ function CarDetails() {
           </Typography>
 
           <Button
-            variant="contained"
-            size="large"
-            fullWidth
-            startIcon={<PhoneIcon />}
-            href={`tel:${car.phone}`}
-            sx={{ mb: 2 }}
-          >
-            Call Seller: {car.phone}
-          </Button>
+  variant="contained"
+  startIcon={<PhoneIcon />}
+  href={`tel:${car.phone}`}
+  sx={{ mb: 1.5, px: 3, py: 0.8 }}
+>
+  Call Seller: {car.phone}
+</Button>
 
-          <Button component={Link} to="/cars" variant="outlined" fullWidth sx={{ mb: 2 }}>
-            Back to Listings
-          </Button>
+<Button component={Link} to="/cars" variant="outlined" sx={{ mb: 1.5, px: 3, py: 0.8 }}>
+  Back to Listings
+</Button>
 
-          <Stack direction="row" spacing={2} sx={{ mb: 3 }}>
-            <Button
-              component={Link}
-              to={`/cars/${id}/edit`}
-              variant="outlined"
-              startIcon={<EditIcon />}
-              fullWidth
-            >
-              Edit
-            </Button>
+<Stack direction="row" spacing={1.5} sx={{ mb: 3 }}>
+  <Button
+    component={Link}
+    to={`/cars/${id}/edit`}
+    variant="outlined"
+    startIcon={<EditIcon />}
+    sx={{ px: 2.5, py: 0.8 }}
+  >
+    Edit
+  </Button>
 
-            <Button
-              variant="outlined"
-              color="error"
-              startIcon={<DeleteIcon />}
-              fullWidth
-              onClick={() => setDeleteDialogOpen(true)}
-            >
-              Delete
-            </Button>
+  <Button
+    variant="outlined"
+    color="error"
+    startIcon={<DeleteIcon />}
+    sx={{ px: 2.5, py: 0.8 }}
+    onClick={() => setDeleteDialogOpen(true)}
+  >
+    Delete
+  </Button>
           </Stack>
 
           <Paper variant="outlined" sx={{ p: 2 }}>
