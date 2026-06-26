@@ -266,15 +266,17 @@ function SellCar() {
               </Grid>
             </Grid>
 
-            <Grid size={{ xs: 12 }}>
-             <Button
-  type="submit" variant="contained" disabled={loading}
-  startIcon={loading ? <CircularProgress size={16} color="inherit" /> : null}
-  sx={{ px: 4, py: 1 }}
->
-  {loading ? "Submitting..." : "Submit Listing"}
-</Button>
-            </Grid>
+           <Grid size={{ xs: 12 }}>
+  <Button
+    type="submit"
+    variant="contained"
+    disabled={loading}
+    startIcon={loading ? <CircularProgress size={16} color="inherit" /> : null}
+    sx={{ px: 4, py: 1 }}
+  >
+    {loading ? "Submitting..." : "Submit Listing"}
+  </Button>
+</Grid>
           </Grid>
         </Box>
       </Paper>

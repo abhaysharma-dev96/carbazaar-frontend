@@ -134,18 +134,25 @@ function CarDetails() {
             ₹{Number(car.price).toLocaleString()}
           </Typography>
 
-          <Button
-  variant="contained"
-  startIcon={<PhoneIcon />}
-  href={`tel:${car.phone}`}
-  sx={{ mb: 1.5, px: 3, py: 0.8 }}
->
-  Call Seller: {car.phone}
-</Button>
+          <Stack direction="row" spacing={1.5} sx={{ mb: 2 }}>
+  <Button
+    variant="contained"
+    startIcon={<PhoneIcon />}
+    href={`tel:${car.phone}`}
+    sx={{ px: 3, py: 0.8 }}
+  >
+    Call Seller
+  </Button>
 
-<Button component={Link} to="/cars" variant="outlined" sx={{ mb: 1.5, px: 3, py: 0.8 }}>
-  Back to Listings
-</Button>
+  <Button
+    component={Link}
+    to="/cars"
+    variant="outlined"
+    sx={{ px: 3, py: 0.8 }}
+  >
+    Back to Listings
+  </Button>
+</Stack>
 
 <Stack direction="row" spacing={1.5} sx={{ mb: 3 }}>
   <Button
