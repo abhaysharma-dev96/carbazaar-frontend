@@ -24,6 +24,7 @@ function CarDetails() {
   const [error, setError] = useState("");
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [deleting, setDeleting] = useState(false);
+  const [activeImg, setActiveImg] = useState(null);
 
   useEffect(() => {
     const loadCar = async () => {
@@ -31,6 +32,7 @@ function CarDetails() {
         setLoading(true);
         const res = await fetchCarById(id);
         setCar(res.data);
+         setActiveImg(res.data.images?.[0]);
       } catch (err) {
         setError("Car not found or something went wrong.");
       } finally {
@@ -84,45 +86,48 @@ function CarDetails() {
   return (
     <Container maxWidth="lg" sx={{ py: 5 }}>
       <Grid container spacing={4}>
-        {/* Images */}
-        <Grid size={{ xs: 12, md: 6 }}>
+       {/* Images */}
+<Grid size={{ xs: 12, md: 6 }}>
+  <Box
+    component="img"
+    src={activeImg || "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=800"}
+    alt={`${car.brand} ${car.model}`}
+    sx={{
+      width: "100%",
+      height: { xs: 260, sm: 320, md: 380 },
+      objectFit: "cover",
+      borderRadius: 3,
+      boxShadow: "0 8px 24px rgba(0,0,0,0.15)",
+      transition: "all 0.3s ease",
+    }}
+  />
+
+  {car.images?.length > 1 && (
+    <Grid container spacing={1.5} sx={{ mt: 1.5 }}>
+      {car.images.map((img, i) => (
+        <Grid key={i} size={{ xs: 4, sm: 3 }}>
           <Box
             component="img"
-            src={car.images?.[0] || "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=800"}
-            alt={`${car.brand} ${car.model}`}
+            src={img}
+            alt={`${car.brand} ${i + 1}`}
+            onClick={() => setActiveImg(img)}
             sx={{
               width: "100%",
-              height: { xs: 260, sm: 320, md: 360 },
+              height: { xs: 80, sm: 100 },
               objectFit: "cover",
-              borderRadius: 3,
-              boxShadow: "0 8px 24px rgba(0,0,0,0.15)",
+              borderRadius: 2,
+              cursor: "pointer",
+              border: activeImg === img ? "2px solid #4e6ef2" : "2px solid transparent",
+              opacity: activeImg === img ? 1 : 0.7,
+              transition: "all 0.2s",
+              "&:hover": { opacity: 1, borderColor: "#4e6ef2" },
             }}
           />
-
-          {car.images?.length > 1 && (
-            <Grid container spacing={1.5} sx={{ mt: 1.5 }}>
-              {car.images.slice(1).map((img, i) => (
-                <Grid key={i} size={{ xs: 6, sm: 4 }}>
-                  <Box
-                    component="img"
-                    src={img}
-                    alt={`${car.brand} ${i + 2}`}
-                    sx={{
-                      width: "100%",
-                      height: { xs: 140, sm: 160 },
-                      objectFit: "cover",
-                      borderRadius: 2,
-                      cursor: "pointer",
-                      border: "2px solid transparent",
-                      transition: "border-color 0.2s",
-                      "&:hover": { borderColor: "primary.main" },
-                    }}
-                  />
-                </Grid>
-              ))}
-            </Grid>
-          )}
         </Grid>
+      ))}
+    </Grid>
+  )}
+</Grid>
 
         {/* Info */}
         <Grid size={{ xs: 12, md: 6 }}>

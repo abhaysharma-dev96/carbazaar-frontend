@@ -3,7 +3,7 @@ import {
   Card, CardMedia, CardContent, Typography,
   Chip, Stack, IconButton, Box, Button,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
 import SpeedIcon from "@mui/icons-material/Speed";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -15,15 +15,20 @@ import { useCompare } from "../../context/CompareContext";
 function CarCard({ car, wishlistIds = [] }) {
   const { user } = useAuth();
   const { addToCompare, removeFromCompare, isInCompare, compareList } = useCompare();
+  const navigate = useNavigate();
   const carId = car._id || car.id;
   const [isWishlisted, setIsWishlisted] = useState(wishlistIds.includes(carId));
   const [loading, setLoading] = useState(false);
   const inCompare = isInCompare(carId);
 
+  const handleCardClick = () => {
+    navigate(`/cars/${carId}`);
+  };
+
   const handleWishlist = async (e) => {
     e.preventDefault();
     e.stopPropagation();
-    if (!user) { window.location.href = "/login"; return; }
+    if (!user) { navigate("/login"); return; }
     try {
       setLoading(true);
       if (isWishlisted) {
@@ -52,8 +57,7 @@ function CarCard({ car, wishlistIds = [] }) {
 
   return (
     <Card
-      component={Link}
-      to={`/cars/${carId}`}
+      onClick={handleCardClick}
       sx={{
         textDecoration: "none",
         borderRadius: 3,
@@ -61,6 +65,7 @@ function CarCard({ car, wishlistIds = [] }) {
         display: "flex",
         flexDirection: "column",
         transition: "transform 0.2s, box-shadow 0.2s",
+        cursor: "pointer",
         "&:hover": { transform: "translateY(-4px)", boxShadow: "0 12px 24px rgba(0,0,0,0.15)" },
         position: "relative",
         border: inCompare ? "2px solid #4e6ef2" : "2px solid transparent",
@@ -68,8 +73,15 @@ function CarCard({ car, wishlistIds = [] }) {
     >
       {/* Heart Icon */}
       <Box sx={{ position: "absolute", top: 8, right: 8, zIndex: 1 }}>
-  <IconButton onClick={handleWishlist} disabled={loading} sx={{ bgcolor: "rgba(255,255,255,0.9)", "&:hover": { bgcolor: "white" }, p: 0.8 }} > {isWishlisted ? <FavoriteIcon sx={{ color: "#e94560", fontSize: 20 }} /> : <FavoriteBorderIcon sx={{ color: "#64748b", fontSize: 20 }} /> }
-        
+        <IconButton
+          onClick={handleWishlist}
+          disabled={loading}
+          sx={{ bgcolor: "rgba(255,255,255,0.9)", "&:hover": { bgcolor: "white" }, p: 0.8 }}
+        >
+          {isWishlisted
+            ? <FavoriteIcon sx={{ color: "#e94560", fontSize: 20 }} />
+            : <FavoriteBorderIcon sx={{ color: "#64748b", fontSize: 20 }} />
+          }
         </IconButton>
       </Box>
 
@@ -94,7 +106,6 @@ function CarCard({ car, wishlistIds = [] }) {
           {car.price?.toString().startsWith("₹") ? car.price : `₹${Number(car.price).toLocaleString()}`}
         </Typography>
 
-        {/* Compare Button */}
         <Button
           onClick={handleCompare}
           variant={inCompare ? "contained" : "outlined"}

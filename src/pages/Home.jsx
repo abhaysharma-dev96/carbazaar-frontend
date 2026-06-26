@@ -345,12 +345,20 @@ useEffect(() => {
         <Typography color="text.secondary">Handpicked quality cars just for you</Typography>
       </Box>
       <Button
-        component={Link} to="/cars" variant="outlined"
-        endIcon={<ArrowForwardIcon />}
-        sx={{ mt: { xs: 2, sm: 0 }, borderColor: "#4e6ef2", color: "#4e6ef2", "&:hover": { bgcolor: "rgba(78,110,242,0.05)", borderColor: "#4e6ef2" } }}
-      >
-        View All Cars
-      </Button>
+  component={Link} to="/cars" variant="outlined"
+  endIcon={<ArrowForwardIcon />}
+  sx={{
+    mt: { xs: 2, sm: 0 },
+    borderColor: "#4e6ef2",
+    color: "#4e6ef2",
+    px: 2.5,
+    py: 0.8,
+    fontSize: "0.85rem",
+    "&:hover": { bgcolor: "rgba(78,110,242,0.05)", borderColor: "#4e6ef2" }
+  }}
+>
+  View All Cars
+</Button>
     </Stack>
 
     <Grid container spacing={3}>
