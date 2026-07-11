@@ -18,7 +18,12 @@ const categories = [
   { label: "Hatchback", icon: "🚘", count: "180+" },
 ];
 
-
+const stats = [
+  { value: "10,000+", label: "Cars Listed" },
+  { value: "50,000+", label: "Happy Buyers" },
+  { value: "100+", label: "Cities Covered" },
+  { value: "4.8★", label: "Avg. Rating" },
+];
 
 const whyUs = [
   {
@@ -44,6 +49,7 @@ const testimonials = [
   { name: "Amit Verma", city: "Jaipur", text: "Trusted platform, genuine sellers, zero hassle.", avatar: "A" },
 ];
 
+const brands = ["Maruti", "Hyundai", "Honda", "Tata", "Mahindra", "Toyota", "Kia", "Skoda", "Volkswagen", "Ford"];
 
 function Home() {
   const [search, setSearch] = useState("");
