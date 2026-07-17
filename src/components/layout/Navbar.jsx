@@ -14,7 +14,6 @@ const navLinks = [
   { label: "Home", path: "/" },
   { label: "Browse Vehicles", path: "/vehicles" },
   { label: "Sell Vehicle", path: "/sell" },
-  { label: "Contact Us", path: "/contact" },
 ];
 function Navbar() {
   const theme = useTheme();
