@@ -109,10 +109,10 @@ function SellCar() {
   return (
     <Container maxWidth="md" sx={{ py: 5 }}>
       <Typography variant="h4" fontWeight="bold" gutterBottom>
-        Sell Your Car
+        Sell Your Car and Bike
       </Typography>
       <Typography color="text.secondary" sx={{ mb: 4 }}>
-        Fill in the details below to list your car for sale.
+        Fill in the details below to list your car and bike for sale.
       </Typography>
 
       {submitted && (

@@ -89,8 +89,8 @@ function CarListing() {
   return (
     <Container maxWidth="xl" sx={{ py: 5 }}>
       <Typography variant="h4" fontWeight="bold" gutterBottom>
-        Browse Cars
-      </Typography>
+        Browse Vehicles     
+         </Typography>
 
       <TextField
         fullWidth

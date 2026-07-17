@@ -55,7 +55,7 @@ function Footer() {
                 maxWidth: 400,
               }}
             >
-              Buy and sell verified used cars across India with confidence.
+              Buy and sell verified used vehicles across India with confidence.
               Compare vehicles, save favourites, and connect directly with
               trusted sellers through a seamless marketplace experience.
             </Typography>
@@ -101,7 +101,7 @@ function Footer() {
                   },
                 }}
               >
-                Browse Cars
+                Browse Vehicles
               </Typography>
 
               <Typography
@@ -117,7 +117,7 @@ function Footer() {
                   },
                 }}
               >
-                Sell Your Car
+                Sell Your Vehicle
               </Typography>
 
               <Typography
@@ -197,7 +197,7 @@ function Footer() {
                 lineHeight: 1.8,
               }}
             >
-              Stay updated with the latest car listings, buying tips, and
+              Stay updated with the latest vehicles listings, buying tips, and
               marketplace updates.
             </Typography>
           </Grid>

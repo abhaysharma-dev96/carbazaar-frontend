@@ -13,13 +13,13 @@ import CarCard from "../components/cars/CarCard";
 import { fetchCars } from "../api/carApi";
 
 const categories = [
-  { label: "SUV", icon: "🚙", count: "320+" },
-  { label: "Sedan", icon: "🚗", count: "210+" },
-  { label: "Hatchback", icon: "🚘", count: "180+" },
+  { label: "Cars", icon:"🚗", count:"500+" },
+  { label: "Bikes", icon:"🏍️", count:"300+" },
+  { label: "Electric", icon:"⚡", count:"100+" },
 ];
 
 const stats = [
-  { value: "10,000+", label: "Cars Listed" },
+  { value: "10,000+", label: "Vehicles Listed" },
   { value: "50,000+", label: "Happy Buyers" },
   { value: "100+", label: "Cities Covered" },
   { value: "4.8★", label: "Avg. Rating" },
@@ -29,7 +29,7 @@ const whyUs = [
   {
     icon: <VerifiedIcon sx={{ fontSize: 36, color: "#4e6ef2" }} />,
     title: "Verified Listings",
-    desc: "Every car is manually verified for authenticity before it goes live.",
+    desc: "Every vehicle is manually verified for authenticity before it goes live.",
   },
   {
     icon: <PriceCheckIcon sx={{ fontSize: 36, color: "#4e6ef2" }} />,
@@ -44,12 +44,12 @@ const whyUs = [
 ];
 
 const testimonials = [
-  { name: "Rahul Sharma", city: "Delhi", text: "Found my dream car within 2 days. Smooth experience!", avatar: "R" },
+  { name: "Rahul Sharma", city: "Delhi", text: "Found my dream vehicle within 2 days. Smooth experience!", avatar: "R" },
   { name: "Priya Mehra", city: "Mumbai", text: "Sold my old Swift in less than a week at a great price.", avatar: "P" },
   { name: "Amit Verma", city: "Jaipur", text: "Trusted platform, genuine sellers, zero hassle.", avatar: "A" },
 ];
 
-const brands = ["Maruti", "Hyundai", "Honda", "Tata", "Mahindra", "Toyota", "Kia", "Skoda", "Volkswagen", "Ford"];
+const brands = ["Maruti", "Hyundai", "Honda","Hero","KTM", "Tata", "Mahindra", "Toyota", "Kia", "Skoda", "Volkswagen", "Ford"];
 
 function Home() {
   const [search, setSearch] = useState("");
@@ -112,7 +112,7 @@ useEffect(() => {
           <Grid container spacing={6} alignItems="center">
             <Grid size={{ xs: 12, md: 6 }}>
               <Chip
-                label="🇮🇳 India's Most Trusted Car Marketplace"
+               label="🇮🇳 India's Most Trusted Vehicle Marketplace"
                 sx={{
                   mb: 3,
                   bgcolor: "rgba(78,110,242,0.15)",
@@ -133,7 +133,7 @@ useEffect(() => {
               >
                 Find Your Perfect{" "}
                 <Box component="span" sx={{ color: "#a5b4fc" }}>
-                  Used Car
+                  Used Vehicle 
                 </Box>{" "}
                 Today
               </Typography>
@@ -142,7 +142,7 @@ useEffect(() => {
                 variant="body1"
                 sx={{ color: "#94a3b8", mb: 4, lineHeight: 1.8, fontSize: "1.1rem" }}
               >
-                Buy, sell and explore thousands of verified second-hand cars at the best prices — right in your city.
+               Buy, sell and explore thousands of verified second-hand cars and bikes at the best prices — right in your city.
               </Typography>
 
               <Box
@@ -183,14 +183,14 @@ useEffect(() => {
                   variant="contained" size="large"
                   endIcon={<ArrowForwardIcon />}
                 >
-                  Explore Cars
-                </Button>
+          Explore Vehicles            
+    </Button>
                 <Button
                   component={Link} to="/sell"
                   variant="outlined" size="large"
                   sx={{ color: "white", borderColor: "rgba(255,255,255,0.4)", "&:hover": { borderColor: "white", bgcolor: "rgba(255,255,255,0.05)" } }}
                 >
-                  Sell Your Car
+                  Sell Vehicles
                 </Button>
               </Stack>
               <Stack
@@ -210,7 +210,7 @@ useEffect(() => {
       variant="body2"
       sx={{ color: "#94a3b8" }}
     >
-      Cars Listed
+   Vehicles Listed
     </Typography>
   </Box>
 
@@ -305,7 +305,7 @@ useEffect(() => {
         <Box sx={{ textAlign: "center", mb: 6 }}>
           <Chip label="Categories" sx={{ bgcolor: "rgba(78,110,242,0.1)", color: "#4e6ef2", mb: 2 }} />
           <Typography variant="h4" fontWeight={800} gutterBottom>Browse by Category</Typography>
-          <Typography color="text.secondary">Choose the type of car you're looking for</Typography>
+          <Typography color="text.secondary">Choose the type of vehicle you're looking for</Typography>
         </Box>
 
         <Grid container spacing={3}>
@@ -327,7 +327,7 @@ useEffect(() => {
                 <Typography sx={{ fontSize: 52, mb: 1 }}>{cat.icon}</Typography>
                 <Typography variant="h6" fontWeight={700}>{cat.label}</Typography>
                 <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5 }}>
-                  {cat.count} Cars Available
+                  {cat.count}  Vehicles Available
                 </Typography>
               </Card>
             </Grid>
@@ -341,8 +341,8 @@ useEffect(() => {
     <Stack direction={{ xs: "column", sm: "row" }} justifyContent="space-between" alignItems={{ sm: "center" }} sx={{ mb: 5 }}>
       <Box>
         <Chip label="Featured" sx={{ bgcolor: "rgba(78,110,242,0.1)", color: "#4e6ef2", mb: 1 }} />
-        <Typography variant="h4" fontWeight={800}>Featured Cars</Typography>
-        <Typography color="text.secondary">Handpicked quality cars just for you</Typography>
+        <Typography variant="h4" fontWeight={800}>Featured Vehicles</Typography>
+        <Typography color="text.secondary">Handpicked quality vehicles just for you</Typography>
       </Box>
       <Button
   component={Link} to="/cars" variant="outlined"
@@ -357,7 +357,7 @@ useEffect(() => {
     "&:hover": { bgcolor: "rgba(78,110,242,0.05)", borderColor: "#4e6ef2" }
   }}
 >
-  View All Cars
+  View All Vehicles
 </Button>
     </Stack>
 
@@ -369,9 +369,9 @@ useEffect(() => {
       ) : featuredCars.length === 0 ? (
         <Grid size={{ xs: 12 }}>
           <Typography color="text.secondary" textAlign="center">
-            No cars listed yet. Be the first to{" "}
+            No vehicles listed yet. Be the first to{" "}
             <Box component={Link} to="/sell" sx={{ color: "#4e6ef2", fontWeight: 600 }}>
-              sell your car
+              sell your vehicle!
             </Box>
             !
           </Typography>
@@ -392,7 +392,8 @@ useEffect(() => {
         <Box sx={{ textAlign: "center", mb: 6 }}>
           <Chip label="Why Us" sx={{ bgcolor: "rgba(78,110,242,0.1)", color: "#4e6ef2", mb: 2 }} />
           <Typography variant="h4" fontWeight={800} gutterBottom>Why Choose CarBazaar?</Typography>
-          <Typography color="text.secondary">We make buying and selling cars simple, safe and transparent</Typography>
+          <Typography color="text.secondary">
+We make buying and selling vehicles simple, safe and transparent</Typography>
         </Box>
 
         <Grid container spacing={4}>
@@ -475,23 +476,23 @@ useEffect(() => {
       >
         <Container maxWidth="md" sx={{ position: "relative", zIndex: 1 }}>
           <Typography variant="h4" fontWeight={800} color="white" gutterBottom>
-            Ready to Sell Your Car?
+            Ready to Sell Your Vehicle?
           </Typography>
           <Typography sx={{ color: "rgba(255,255,255,0.85)", mb: 4, fontSize: "1.1rem" }}>
-            List your car in under 5 minutes and reach thousands of genuine buyers today.
+            List your vehicle  in under 5 minutes and reach thousands of genuine buyers today.
           </Typography>
           <Stack direction={{ xs: "column", sm: "row" }} spacing={2} justifyContent="center">
             <Button
               component={Link} to="/sell" size="large"
               sx={{ bgcolor: "white", color: "#4e6ef2", fontWeight: 700, px: 5, "&:hover": { bgcolor: "#f8fafc" } }}
             >
-              List My Car Now
+              List My Vehicle  Now
             </Button>
             <Button
               component={Link} to="/cars" size="large" variant="outlined"
               sx={{ borderColor: "rgba(255,255,255,0.5)", color: "white", px: 5, "&:hover": { borderColor: "white", bgcolor: "rgba(255,255,255,0.1)" } }}
             >
-              Browse Cars
+              Browse Vehicles
             </Button>
           </Stack>
         </Container>
