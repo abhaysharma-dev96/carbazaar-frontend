@@ -15,10 +15,12 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { fetchCarById, deleteCar } from "../api/carApi";
+import { useAuth } from "../context/AuthContext";
 
 function CarDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [car, setCar] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -159,27 +161,29 @@ function CarDetails() {
   </Button>
 </Stack>
 
-<Stack direction="row" spacing={1.5} sx={{ mb: 3 }}>
-  <Button
-    component={Link}
-    to={`/cars/${id}/edit`}
-    variant="outlined"
-    startIcon={<EditIcon />}
-    sx={{ px: 2.5, py: 0.8 }}
-  >
-    Edit
-  </Button>
+{user && car.owner === user._id && (
+  <Stack direction="row" spacing={1.5} sx={{ mb: 3 }}>
+    <Button
+      component={Link}
+      to={`/cars/${id}/edit`}
+      variant="outlined"
+      startIcon={<EditIcon />}
+      sx={{ px: 2.5, py: 0.8 }}
+    >
+      Edit
+    </Button>
 
-  <Button
-    variant="outlined"
-    color="error"
-    startIcon={<DeleteIcon />}
-    sx={{ px: 2.5, py: 0.8 }}
-    onClick={() => setDeleteDialogOpen(true)}
-  >
-    Delete
-  </Button>
-          </Stack>
+    <Button
+      variant="outlined"
+      color="error"
+      startIcon={<DeleteIcon />}
+      sx={{ px: 2.5, py: 0.8 }}
+      onClick={() => setDeleteDialogOpen(true)}
+    >
+      Delete
+    </Button>
+  </Stack>
+)}
 
           <Paper variant="outlined" sx={{ p: 2 }}>
             <Grid container spacing={2}>
