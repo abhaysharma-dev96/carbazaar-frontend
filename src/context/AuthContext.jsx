@@ -7,22 +7,27 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("carbazaar_user");
+    const storedUser = sessionStorage.getItem("carbazaar_user");
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
     setLoading(false);
   }, []);
 
-  const login = (userData) => {
-    localStorage.setItem("carbazaar_user", JSON.stringify(userData));
-    setUser(userData);
-  };
+ const login = (userData) => {
+  sessionStorage.setItem(
+    "carbazaar_user",
+    JSON.stringify(userData)
+  );
+  setUser(userData);
+};
 
-  const logout = () => {
-    localStorage.removeItem("carbazaar_user");
-    setUser(null);
-  };
+ const logout = () => {
+  sessionStorage.removeItem(
+    "carbazaar_user"
+  );
+  setUser(null);
+};
 
   return (
     <AuthContext.Provider value={{ user, login, logout, loading }}>
