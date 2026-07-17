@@ -12,11 +12,10 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useAuth } from "../../context/AuthContext";
 const navLinks = [
   { label: "Home", path: "/" },
-  { label: "Browse Cars", path: "/cars" },
-  { label: "Sell Your Car", path: "/sell" },
+  { label: "Browse Vehicles", path: "/vehicles" },
+  { label: "Sell Vehicle", path: "/sell" },
   { label: "Contact Us", path: "/contact" },
 ];
-
 function Navbar() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -55,7 +54,7 @@ const handleLogout = () => {
 
             {!isMobile && (
               <Stack direction="row" alignItems="center" spacing={1}>
-                {navLinks.slice(0, 3).map((link) => (
+                {navLinks.slice(0, 4).map((link) => (
                   <Button
                     key={link.path}
                     component={Link}
