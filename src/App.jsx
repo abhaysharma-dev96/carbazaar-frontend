@@ -13,6 +13,7 @@ import Signup from "./pages/Signup";
 import Wishlist from "./pages/Wishlist";
 import CompareBar from "./components/cars/CompareBar";
 import Compare from "./pages/Compare";
+import BikeListing from "./pages/BikeListing";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/cars" element={<CarListing />} />
+<Route path="/bikes" element={<BikeListing />} />
         <Route path="/cars/:id" element={<CarDetails />} />
         <Route path="/sell" element={<SellCar />} />
         <Route path="/contact" element={<ContactUs />} />

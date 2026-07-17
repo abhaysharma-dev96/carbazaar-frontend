@@ -46,7 +46,7 @@ function CarListing() {
 
        const res = await fetchCars({
   ...params,
-  vehicleType: "car",
+  vehicleType: "bike",
 });
         setCars(res.data);
       } catch (err) {
@@ -89,7 +89,7 @@ function CarListing() {
   return (
     <Container maxWidth="xl" sx={{ py: 5 }}>
       <Typography variant="h4" fontWeight="bold" gutterBottom>
-        Browse Cars
+        Browse Bikes
       </Typography>
 
       <TextField

@@ -9,7 +9,9 @@ import { createCar } from "../api/carApi";
 
 const fuelTypes = ["Petrol", "Diesel", "CNG", "Electric", "Hybrid"];
 const transmissions = ["Manual", "Automatic"];
-const categories = ["suv", "sedan", "hatchback"];
+const categories = [
+  "suv","sedan","hatchback","sports-bike","cruiser","scooter", "commuter",
+];
 const indianStates = [
   "DL - Delhi", "MH - Maharashtra", "KA - Karnataka", "TN - Tamil Nadu",
   "RJ - Rajasthan", "GJ - Gujarat", "UP - Uttar Pradesh", "HR - Haryana",
@@ -17,9 +19,10 @@ const indianStates = [
 ];
 
 const initialForm = {
-  brand: "", model: "", year: "", price: "", km: "",
-  fuelType: "", transmission: "", color: "", owners: "",
-  regState: "", phone: "", description: "", category: "",
+  vehicleType: "car",
+  brand: "",model: "",year: "",price: "", km: "", fuelType: "",
+   transmission: "", color: "", owners: "", 
+  regState: "", phone: "",description: "",category: "",
 };
 
 function SellCar() {
@@ -80,6 +83,7 @@ function SellCar() {
   };
 
   const handleSubmit = async (e) => {
+     console.log(form);
     e.preventDefault();
     if (!validate()) return;
 
@@ -126,6 +130,18 @@ function SellCar() {
       <Paper sx={{ p: 4 }}>
         <Box component="form" onSubmit={handleSubmit}>
           <Grid container spacing={3}>
+            <Grid size={{ xs: 12, sm: 6 }}>
+  <TextField
+    select
+    fullWidth
+    label="Vehicle Type"
+    value={form.vehicleType}
+    onChange={handleChange("vehicleType")}
+  >
+    <MenuItem value="car">Car</MenuItem>
+    <MenuItem value="bike">Bike</MenuItem>
+  </TextField>
+</Grid>
             <Grid size={{ xs: 12, sm: 6 }}>
               <TextField fullWidth label="Brand" value={form.brand}
                 onChange={handleChange("brand")}
@@ -198,15 +214,26 @@ function SellCar() {
             </Grid>
 
             <Grid size={{ xs: 12, sm: 6 }}>
-              <TextField select fullWidth label="Category" value={form.category}
-                onChange={handleChange("category")}
-                error={!!errors.category} helperText={errors.category}
-              >
-                {categories.map((c) => (
-                  <MenuItem key={c} value={c}>{c.charAt(0).toUpperCase() + c.slice(1)}</MenuItem>
-                ))}
-              </TextField>
-            </Grid>
+  <TextField
+    select
+    fullWidth
+    label="Category"
+    value={form.category}
+    onChange={handleChange("category")}
+    error={!!errors.category}
+    helperText={errors.category}
+  >
+    {(
+      form.vehicleType === "car"
+        ? ["suv", "sedan", "hatchback"]
+        : ["sports-bike", "cruiser", "scooter", "commuter"]
+    ).map((c) => (
+      <MenuItem key={c} value={c}>
+        {c.charAt(0).toUpperCase() + c.slice(1)}
+      </MenuItem>
+    ))}
+  </TextField>
+</Grid>
             <Grid size={{ xs: 12, sm: 6 }}>
               <TextField fullWidth label="Seller Contact Number" value={form.phone}
                 onChange={handleChange("phone")}
@@ -267,6 +294,7 @@ function SellCar() {
             </Grid>
 
            <Grid size={{ xs: 12 }}>
+           
   <Button
     type="submit"
     variant="contained"
