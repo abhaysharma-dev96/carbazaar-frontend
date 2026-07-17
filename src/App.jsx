@@ -19,21 +19,33 @@ function App() {
   return (
     <>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-    
-        <Route path="/cars" element={<CarListing />} />
-<Route path="/bikes" element={<BikeListing />} />
-        <Route path="/cars/:id" element={<CarDetails />} />
-        <Route path="/sell" element={<SellCar />} />
-        <Route path="/contact" element={<ContactUs />} />
-        <Route path="/cars/:id/edit" element={<EditCar />} />
-        <Route path="/login" element={<Login />} />
-<Route path="/signup" element={<Signup />} />
-        <Route path="*" element={<NotFound />} />
-        <Route path="/wishlist" element={<Wishlist />} />
-        <Route path="/compare" element={<Compare />} />
-      </Routes>
+<Routes>
+  <Route path="/" element={<Home />} />
+
+  <Route path="/vehicles" element={<CarListing />} />
+
+  <Route path="/cars" element={<CarListing />} />
+
+  <Route path="/bikes" element={<BikeListing />} />
+
+  <Route path="/cars/:id" element={<CarDetails />} />
+
+  <Route path="/sell" element={<SellCar />} />
+
+  <Route path="/contact" element={<ContactUs />} />
+
+  <Route path="/cars/:id/edit" element={<EditCar />} />
+
+  <Route path="/login" element={<Login />} />
+
+  <Route path="/signup" element={<Signup />} />
+
+  <Route path="/wishlist" element={<Wishlist />} />
+
+  <Route path="/compare" element={<Compare />} />
+
+  <Route path="*" element={<NotFound />} />
+</Routes>
       <Footer />
 <CompareBar />
     </>
