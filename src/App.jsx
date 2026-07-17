@@ -14,7 +14,6 @@ import Wishlist from "./pages/Wishlist";
 import CompareBar from "./components/cars/CompareBar";
 import Compare from "./pages/Compare";
 import BikeListing from "./pages/BikeListing";
-import VehicleCategory from "./pages/VehicleCategory";
 
 function App() {
   return (
@@ -22,10 +21,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route 
- path="/vehicles" 
- element={<VehicleCategory />} 
-/>
+    
         <Route path="/cars" element={<CarListing />} />
 <Route path="/bikes" element={<BikeListing />} />
         <Route path="/cars/:id" element={<CarDetails />} />
