@@ -13,14 +13,32 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import DirectionsCarFilledIcon from "@mui/icons-material/DirectionsCarFilled";
 
+const C = {
+  bg: "#14161A",
+  surface2: "#23262C",
+  border: "#2C3036",
+  accent: "#C9922F",
+  text: "#F1F1EE",
+  textMuted: "#9BA1A8",
+};
+const displayFont = `"Oswald", "Arial Narrow", sans-serif`;
+const monoFont = `"IBM Plex Mono", "Roboto Mono", monospace`;
+
+const quickLinks = [
+  { label: "Home", to: "/" },
+  { label: "Browse vehicles", to: "/cars" },
+  { label: "Sell your vehicle", to: "/sell" },
+  { label: "Contact us", to: "/contact" },
+];
+
 function Footer() {
   return (
     <Box
       sx={{
-        bgcolor: "#0f172a",
-        color: "white",
+        bgcolor: C.bg,
+        color: C.text,
         mt: 6,
-        borderTop: "1px solid rgba(255,255,255,0.08)",
+        borderTop: `1px solid ${C.border}`,
       }}
     >
       <Container maxWidth="xl">
@@ -30,29 +48,29 @@ function Footer() {
             <Stack direction="row" alignItems="center" spacing={1.5} sx={{ mb: 2 }}>
               <Box
                 sx={{
-                  bgcolor: "#4e6ef2",
-                  width: 42,
-                  height: 42,
-                  borderRadius: 2,
+                  border: `1px solid ${C.accent}`,
+                  width: 40,
+                  height: 40,
+                  borderRadius: "6px",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                 }}
               >
-                <DirectionsCarFilledIcon />
+                <DirectionsCarFilledIcon sx={{ color: C.accent, fontSize: 22 }} />
               </Box>
 
-              <Typography variant="h6" fontWeight={800}>
+              <Typography sx={{ fontFamily: displayFont, fontWeight: 600, fontSize: 20, textTransform: "uppercase", letterSpacing: 0.5 }}>
                 CarBazaar
               </Typography>
             </Stack>
 
             <Typography
-              variant="body2"
               sx={{
-                color: "#94a3b8",
+                color: C.textMuted,
                 lineHeight: 1.8,
                 maxWidth: 400,
+                fontSize: 14,
               }}
             >
               Buy and sell verified used vehicles across India with confidence.
@@ -63,151 +81,74 @@ function Footer() {
 
           {/* Quick Links */}
           <Grid size={{ xs: 6, md: 3 }}>
-            <Typography
-              variant="subtitle1"
-              fontWeight={700}
-              sx={{ mb: 2 }}
-            >
-              Quick Links
+            <Typography sx={{ fontFamily: monoFont, fontSize: 12, letterSpacing: 1.5, color: C.accent, mb: 2 }}>
+              QUICK LINKS
             </Typography>
 
             <Stack spacing={1.5}>
-              <Typography
-                component={Link}
-                to="/"
-                sx={{
-                  color: "#94a3b8",
-                  textDecoration: "none",
-                  transition: "0.2s",
-                  "&:hover": {
-                    color: "#fff",
-                    transform: "translateX(4px)",
-                  },
-                }}
-              >
-                Home
-              </Typography>
-
-              <Typography
-                component={Link}
-                to="/cars"
-                sx={{
-                  color: "#94a3b8",
-                  textDecoration: "none",
-                  transition: "0.2s",
-                  "&:hover": {
-                    color: "#fff",
-                    transform: "translateX(4px)",
-                  },
-                }}
-              >
-                Browse Vehicles
-              </Typography>
-
-              <Typography
-                component={Link}
-                to="/sell"
-                sx={{
-                  color: "#94a3b8",
-                  textDecoration: "none",
-                  transition: "0.2s",
-                  "&:hover": {
-                    color: "#fff",
-                    transform: "translateX(4px)",
-                  },
-                }}
-              >
-                Sell Your Vehicle
-              </Typography>
-
-              <Typography
-                component={Link}
-                to="/contact"
-                sx={{
-                  color: "#94a3b8",
-                  textDecoration: "none",
-                  transition: "0.2s",
-                  "&:hover": {
-                    color: "#fff",
-                    transform: "translateX(4px)",
-                  },
-                }}
-              >
-                Contact Us
-              </Typography>
+              {quickLinks.map((link) => (
+                <Typography
+                  key={link.to}
+                  component={Link}
+                  to={link.to}
+                  sx={{
+                    color: C.textMuted,
+                    textDecoration: "none",
+                    fontSize: 14,
+                    transition: "0.15s",
+                    "&:hover": {
+                      color: C.accent,
+                      transform: "translateX(4px)",
+                    },
+                  }}
+                >
+                  {link.label}
+                </Typography>
+              ))}
             </Stack>
           </Grid>
 
           {/* Social */}
           <Grid size={{ xs: 6, md: 4 }}>
-            <Typography
-              variant="subtitle1"
-              fontWeight={700}
-              sx={{ mb: 2 }}
-            >
-              Follow Us
+            <Typography sx={{ fontFamily: monoFont, fontSize: 12, letterSpacing: 1.5, color: C.accent, mb: 2 }}>
+              FOLLOW US
             </Typography>
 
             <Stack direction="row" spacing={1.5}>
-              <IconButton
-                sx={{
-                  bgcolor: "rgba(255,255,255,0.06)",
-                  color: "#cbd5e1",
-                  "&:hover": {
-                    bgcolor: "#4e6ef2",
-                    color: "#fff",
-                  },
-                }}
-              >
-                <FacebookIcon />
-              </IconButton>
-
-              <IconButton
-                sx={{
-                  bgcolor: "rgba(255,255,255,0.06)",
-                  color: "#cbd5e1",
-                  "&:hover": {
-                    bgcolor: "#4e6ef2",
-                    color: "#fff",
-                  },
-                }}
-              >
-                <InstagramIcon />
-              </IconButton>
-
-              <IconButton
-                sx={{
-                  bgcolor: "rgba(255,255,255,0.06)",
-                  color: "#cbd5e1",
-                  "&:hover": {
-                    bgcolor: "#4e6ef2",
-                    color: "#fff",
-                  },
-                }}
-              >
-                <TwitterIcon />
-              </IconButton>
+              {[FacebookIcon, InstagramIcon, TwitterIcon].map((Icon, i) => (
+                <IconButton
+                  key={i}
+                  sx={{
+                    border: `1px solid ${C.border}`,
+                    borderRadius: "6px",
+                    color: C.textMuted,
+                    "&:hover": {
+                      borderColor: C.accent,
+                      color: C.accent,
+                      bgcolor: "rgba(201,146,47,0.08)",
+                    },
+                  }}
+                >
+                  <Icon fontSize="small" />
+                </IconButton>
+              ))}
             </Stack>
 
             <Typography
-              variant="body2"
               sx={{
-                color: "#94a3b8",
+                color: C.textMuted,
                 mt: 2,
                 lineHeight: 1.8,
+                fontSize: 14,
               }}
             >
-              Stay updated with the latest vehicles listings, buying tips, and
+              Stay updated with the latest vehicle listings, buying tips, and
               marketplace updates.
             </Typography>
           </Grid>
         </Grid>
 
-        <Divider
-          sx={{
-            borderColor: "rgba(255,255,255,0.08)",
-          }}
-        />
+        <Divider sx={{ borderColor: C.border }} />
 
         <Box
           sx={{
@@ -219,10 +160,11 @@ function Footer() {
           }}
         >
           <Typography
-            variant="body2"
             sx={{
-              color: "#64748b",
-              fontSize: "0.85rem",
+              fontFamily: monoFont,
+              color: C.textMuted,
+              fontSize: "0.75rem",
+              letterSpacing: 0.5,
             }}
           >
             © {new Date().getFullYear()} CarBazaar. All rights reserved.

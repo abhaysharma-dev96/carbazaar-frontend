@@ -10,7 +10,10 @@ import { fetchCarById, updateCar } from "../api/carApi";
 
 const fuelTypes = ["Petrol", "Diesel", "CNG", "Electric", "Hybrid"];
 const transmissions = ["Manual", "Automatic"];
-const categories = ["suv", "sedan", "hatchback"];
+const categories = [
+  "suv", "sedan", "hatchback",
+  "sports-bike", "cruiser", "scooter", "commuter"
+];
 const indianStates = [
   "DL - Delhi", "MH - Maharashtra", "KA - Karnataka", "TN - Tamil Nadu",
   "RJ - Rajasthan", "GJ - Gujarat", "UP - Uttar Pradesh", "HR - Haryana",

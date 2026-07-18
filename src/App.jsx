@@ -14,40 +14,43 @@ import Wishlist from "./pages/Wishlist";
 import CompareBar from "./components/cars/CompareBar";
 import Compare from "./pages/Compare";
 import BikeListing from "./pages/BikeListing";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
     <>
       <Navbar />
-<Routes>
-  <Route path="/" element={<Home />} />
+      <Routes>
+        {/* Public Routes */}
+        <Route path="/" element={<Home />} />
+        <Route path="/vehicles" element={<CarListing />} />
+        <Route path="/cars" element={<CarListing />} />
+        <Route path="/bikes" element={<BikeListing />} />
+        <Route path="/cars/:id" element={<CarDetails />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+      
 
-  <Route path="/vehicles" element={<CarListing />} />
-
-  <Route path="/cars" element={<CarListing />} />
-
-  <Route path="/bikes" element={<BikeListing />} />
-
-  <Route path="/cars/:id" element={<CarDetails />} />
-
-  <Route path="/sell" element={<SellCar />} />
-
-  <Route path="/contact" element={<ContactUs />} />
-
-  <Route path="/cars/:id/edit" element={<EditCar />} />
-
-  <Route path="/login" element={<Login />} />
-
-  <Route path="/signup" element={<Signup />} />
-
-  <Route path="/wishlist" element={<Wishlist />} />
-
-  <Route path="/compare" element={<Compare />} />
-
-  <Route path="*" element={<NotFound />} />
-</Routes>
+        {/* Protected Routes */}
+        <Route path="/sell" element={
+          <ProtectedRoute><SellCar /></ProtectedRoute>
+        } />
+        <Route path="/cars/:id/edit" element={
+          <ProtectedRoute><EditCar /></ProtectedRoute>
+        } />
+        <Route path="/wishlist" element={
+          <ProtectedRoute><Wishlist /></ProtectedRoute>
+        } />
+       <Route path="/compare" element={
+          <ProtectedRoute><Compare /></ProtectedRoute>
+        } />
+        <Route path="/contact" element={
+          <ProtectedRoute><ContactUs /></ProtectedRoute>
+        } />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
       <Footer />
-<CompareBar />
+      <CompareBar />
     </>
   );
 }

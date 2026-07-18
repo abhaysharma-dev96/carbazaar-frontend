@@ -7,11 +7,33 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { createCar } from "../api/carApi";
 
+const C = {
+  bg: "#14161A",
+  surface: "#1C1F24",
+  surface2: "#23262C",
+  border: "#2C3036",
+  accent: "#C9922F",
+  accentDark: "#9C701E",
+  text: "#F1F1EE",
+  textMuted: "#9BA1A8",
+};
+const displayFont = `"Oswald", "Arial Narrow", sans-serif`;
+const monoFont = `"IBM Plex Mono", "Roboto Mono", monospace`;
+
+/* shared dark-field styling, reused on every TextField */
+const fieldSx = {
+  "& .MuiInputBase-root": { color: C.text, bgcolor: C.surface2, borderRadius: "4px" },
+  "& .MuiInputLabel-root": { color: C.textMuted },
+  "& .MuiInputLabel-root.Mui-focused": { color: C.accent },
+  "& .MuiOutlinedInput-notchedOutline": { borderColor: C.border },
+  "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: C.accent },
+  "& .Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: C.accent },
+  "& .MuiFormHelperText-root": { color: C.textMuted },
+  "& .MuiSvgIcon-root": { color: C.textMuted },
+};
+
 const fuelTypes = ["Petrol", "Diesel", "CNG", "Electric", "Hybrid"];
 const transmissions = ["Manual", "Automatic"];
-const categories = [
-  "suv","sedan","hatchback","sports-bike","cruiser","scooter", "commuter",
-];
 const indianStates = [
   "DL - Delhi", "MH - Maharashtra", "KA - Karnataka", "TN - Tamil Nadu",
   "RJ - Rajasthan", "GJ - Gujarat", "UP - Uttar Pradesh", "HR - Haryana",
@@ -20,9 +42,9 @@ const indianStates = [
 
 const initialForm = {
   vehicleType: "car",
-  brand: "",model: "",year: "",price: "", km: "", fuelType: "",
-   transmission: "", color: "", owners: "", 
-  regState: "", phone: "",description: "",category: "",
+  brand: "", model: "", year: "", price: "", km: "", fuelType: "",
+  transmission: "", color: "", owners: "",
+  regState: "", phone: "", description: "", category: "",
 };
 
 function SellCar() {
@@ -83,7 +105,7 @@ function SellCar() {
   };
 
   const handleSubmit = async (e) => {
-     console.log(form);
+    console.log(form);
     e.preventDefault();
     if (!validate()) return;
 
@@ -107,208 +129,211 @@ function SellCar() {
   };
 
   return (
-    <Container maxWidth="md" sx={{ py: 5 }}>
-      <Typography variant="h4" fontWeight="bold" gutterBottom>
-        Sell Your Car and Bike
-      </Typography>
-      <Typography color="text.secondary" sx={{ mb: 4 }}>
-        Fill in the details below to list your car and bike for sale.
-      </Typography>
+    <Box sx={{ minHeight: "100vh", bgcolor: C.bg, py: 5 }}>
+      <Container maxWidth="md">
+        <Typography sx={{ fontFamily: monoFont, fontSize: 12, letterSpacing: 1.5, color: C.accent, mb: 1 }}>
+          LIST YOUR VEHICLE
+        </Typography>
+        <Typography sx={{ fontFamily: displayFont, fontWeight: 600, fontSize: { xs: 28, sm: 34 }, textTransform: "uppercase", color: C.text, mb: 1 }}>
+          Sell your car and bike
+        </Typography>
+        <Typography sx={{ color: C.textMuted, mb: 4 }}>
+          Fill in the details below to list your car and bike for sale.
+        </Typography>
 
-      {submitted && (
-        <Alert severity="success" sx={{ mb: 3 }} onClose={() => setSubmitted(false)}>
-          Your car listing has been submitted successfully! It will appear in Browse Cars shortly.
-        </Alert>
-      )}
+        {submitted && (
+          <Alert severity="success" sx={{ mb: 3, bgcolor: "#1C3324", color: "#8FD6A5", border: "1px solid #2E5C3C" }} onClose={() => setSubmitted(false)}>
+            Your car listing has been submitted successfully. It will appear in Browse Cars shortly.
+          </Alert>
+        )}
 
-      {serverError && (
-        <Alert severity="error" sx={{ mb: 3 }} onClose={() => setServerError("")}>
-          {serverError}
-        </Alert>
-      )}
+        {serverError && (
+          <Alert severity="error" sx={{ mb: 3, bgcolor: "#3A1F1F", color: "#F1B4B4", border: "1px solid #5C2E2E" }} onClose={() => setServerError("")}>
+            {serverError}
+          </Alert>
+        )}
 
-      <Paper sx={{ p: 4 }}>
-        <Box component="form" onSubmit={handleSubmit}>
-          <Grid container spacing={3}>
-            <Grid size={{ xs: 12, sm: 6 }}>
-  <TextField
-    select
-    fullWidth
-    label="Vehicle Type"
-    value={form.vehicleType}
-    onChange={handleChange("vehicleType")}
-  >
-    <MenuItem value="car">Car</MenuItem>
-    <MenuItem value="bike">Bike</MenuItem>
-  </TextField>
-</Grid>
-            <Grid size={{ xs: 12, sm: 6 }}>
-              <TextField fullWidth label="Brand" value={form.brand}
-                onChange={handleChange("brand")}
-                error={!!errors.brand} helperText={errors.brand}
-              />
-            </Grid>
-            <Grid size={{ xs: 12, sm: 6 }}>
-              <TextField fullWidth label="Model" value={form.model}
-                onChange={handleChange("model")}
-                error={!!errors.model} helperText={errors.model}
-              />
-            </Grid>
+        <Paper sx={{ p: 4, bgcolor: C.surface, border: `1px solid ${C.border}`, borderRadius: "6px" }}>
+          <Box component="form" onSubmit={handleSubmit}>
+            <Grid container spacing={3}>
+              <Grid size={{ xs: 12, sm: 6 }}>
+                <TextField select fullWidth label="Vehicle type" value={form.vehicleType}
+                  onChange={handleChange("vehicleType")} sx={fieldSx}
+                >
+                  <MenuItem value="car">Car</MenuItem>
+                  <MenuItem value="bike">Bike</MenuItem>
+                </TextField>
+              </Grid>
+              <Grid size={{ xs: 12, sm: 6 }}>
+                <TextField fullWidth label="Brand" value={form.brand}
+                  onChange={handleChange("brand")}
+                  error={!!errors.brand} helperText={errors.brand} sx={fieldSx}
+                />
+              </Grid>
+              <Grid size={{ xs: 12, sm: 6 }}>
+                <TextField fullWidth label="Model" value={form.model}
+                  onChange={handleChange("model")}
+                  error={!!errors.model} helperText={errors.model} sx={fieldSx}
+                />
+              </Grid>
 
-            <Grid size={{ xs: 12, sm: 6 }}>
-              <TextField fullWidth label="Manufacturing Year" type="number" value={form.year}
-                onChange={handleChange("year")}
-                error={!!errors.year} helperText={errors.year}
-              />
-            </Grid>
-            <Grid size={{ xs: 12, sm: 6 }}>
-              <TextField fullWidth label="Price (₹)" type="number" value={form.price}
-                onChange={handleChange("price")}
-                error={!!errors.price} helperText={errors.price}
-              />
-            </Grid>
+              <Grid size={{ xs: 12, sm: 6 }}>
+                <TextField fullWidth label="Manufacturing year" type="number" value={form.year}
+                  onChange={handleChange("year")}
+                  error={!!errors.year} helperText={errors.year} sx={fieldSx}
+                />
+              </Grid>
+              <Grid size={{ xs: 12, sm: 6 }}>
+                <TextField fullWidth label="Price (₹)" type="number" value={form.price}
+                  onChange={handleChange("price")}
+                  error={!!errors.price} helperText={errors.price} sx={fieldSx}
+                />
+              </Grid>
 
-            <Grid size={{ xs: 12, sm: 6 }}>
-              <TextField fullWidth label="KM Driven" type="number" value={form.km}
-                onChange={handleChange("km")}
-                error={!!errors.km} helperText={errors.km}
-              />
-            </Grid>
-            <Grid size={{ xs: 12, sm: 6 }}>
-              <TextField select fullWidth label="Fuel Type" value={form.fuelType}
-                onChange={handleChange("fuelType")}
-                error={!!errors.fuelType} helperText={errors.fuelType}
-              >
-                {fuelTypes.map((f) => <MenuItem key={f} value={f}>{f}</MenuItem>)}
-              </TextField>
-            </Grid>
+              <Grid size={{ xs: 12, sm: 6 }}>
+                <TextField fullWidth label="KM driven" type="number" value={form.km}
+                  onChange={handleChange("km")}
+                  error={!!errors.km} helperText={errors.km} sx={fieldSx}
+                />
+              </Grid>
+              <Grid size={{ xs: 12, sm: 6 }}>
+                <TextField select fullWidth label="Fuel type" value={form.fuelType}
+                  onChange={handleChange("fuelType")}
+                  error={!!errors.fuelType} helperText={errors.fuelType} sx={fieldSx}
+                >
+                  {fuelTypes.map((f) => <MenuItem key={f} value={f}>{f}</MenuItem>)}
+                </TextField>
+              </Grid>
 
-            <Grid size={{ xs: 12, sm: 6 }}>
-              <TextField select fullWidth label="Transmission" value={form.transmission}
-                onChange={handleChange("transmission")}
-                error={!!errors.transmission} helperText={errors.transmission}
-              >
-                {transmissions.map((t) => <MenuItem key={t} value={t}>{t}</MenuItem>)}
-              </TextField>
-            </Grid>
-            <Grid size={{ xs: 12, sm: 6 }}>
-              <TextField fullWidth label="Color" value={form.color}
-                onChange={handleChange("color")}
-                error={!!errors.color} helperText={errors.color}
-              />
-            </Grid>
+              <Grid size={{ xs: 12, sm: 6 }}>
+                <TextField select fullWidth label="Transmission" value={form.transmission}
+                  onChange={handleChange("transmission")}
+                  error={!!errors.transmission} helperText={errors.transmission} sx={fieldSx}
+                >
+                  {transmissions.map((t) => <MenuItem key={t} value={t}>{t}</MenuItem>)}
+                </TextField>
+              </Grid>
+              <Grid size={{ xs: 12, sm: 6 }}>
+                <TextField fullWidth label="Color" value={form.color}
+                  onChange={handleChange("color")}
+                  error={!!errors.color} helperText={errors.color} sx={fieldSx}
+                />
+              </Grid>
 
-            <Grid size={{ xs: 12, sm: 6 }}>
-              <TextField fullWidth label="Number of Owners" type="number" value={form.owners}
-                onChange={handleChange("owners")}
-                error={!!errors.owners} helperText={errors.owners}
-              />
-            </Grid>
-            <Grid size={{ xs: 12, sm: 6 }}>
-              <TextField select fullWidth label="Registration State" value={form.regState}
-                onChange={handleChange("regState")}
-                error={!!errors.regState} helperText={errors.regState}
-              >
-                {indianStates.map((s) => <MenuItem key={s} value={s}>{s}</MenuItem>)}
-              </TextField>
-            </Grid>
+              <Grid size={{ xs: 12, sm: 6 }}>
+                <TextField fullWidth label="Number of owners" type="number" value={form.owners}
+                  onChange={handleChange("owners")}
+                  error={!!errors.owners} helperText={errors.owners} sx={fieldSx}
+                />
+              </Grid>
+              <Grid size={{ xs: 12, sm: 6 }}>
+                <TextField select fullWidth label="Registration state" value={form.regState}
+                  onChange={handleChange("regState")}
+                  error={!!errors.regState} helperText={errors.regState} sx={fieldSx}
+                >
+                  {indianStates.map((s) => <MenuItem key={s} value={s}>{s}</MenuItem>)}
+                </TextField>
+              </Grid>
 
-            <Grid size={{ xs: 12, sm: 6 }}>
-  <TextField
-    select
-    fullWidth
-    label="Category"
-    value={form.category}
-    onChange={handleChange("category")}
-    error={!!errors.category}
-    helperText={errors.category}
-  >
-    {(
-      form.vehicleType === "car"
-        ? ["suv", "sedan", "hatchback"]
-        : ["sports-bike", "cruiser", "scooter", "commuter"]
-    ).map((c) => (
-      <MenuItem key={c} value={c}>
-        {c.charAt(0).toUpperCase() + c.slice(1)}
-      </MenuItem>
-    ))}
-  </TextField>
-</Grid>
-            <Grid size={{ xs: 12, sm: 6 }}>
-              <TextField fullWidth label="Seller Contact Number" value={form.phone}
-                onChange={handleChange("phone")}
-                error={!!errors.phone} helperText={errors.phone || "10-digit mobile number"}
-              />
-            </Grid>
+              <Grid size={{ xs: 12, sm: 6 }}>
+                <TextField select fullWidth label="Category" value={form.category}
+                  onChange={handleChange("category")}
+                  error={!!errors.category} helperText={errors.category} sx={fieldSx}
+                >
+                  {(
+                    form.vehicleType === "car"
+                      ? ["suv", "sedan", "hatchback"]
+                      : ["sports-bike", "cruiser", "scooter", "commuter"]
+                  ).map((c) => (
+                    <MenuItem key={c} value={c}>
+                      {c.charAt(0).toUpperCase() + c.slice(1)}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </Grid>
+              <Grid size={{ xs: 12, sm: 6 }}>
+                <TextField fullWidth label="Seller contact number" value={form.phone}
+                  onChange={handleChange("phone")}
+                  error={!!errors.phone} helperText={errors.phone || "10-digit mobile number"} sx={fieldSx}
+                />
+              </Grid>
 
-            <Grid size={{ xs: 12 }}>
-              <TextField fullWidth multiline rows={4} label="Description" value={form.description}
-                onChange={handleChange("description")}
-                error={!!errors.description} helperText={errors.description}
-              />
-            </Grid>
+              <Grid size={{ xs: 12 }}>
+                <TextField fullWidth multiline rows={4} label="Description" value={form.description}
+                  onChange={handleChange("description")}
+                  error={!!errors.description} helperText={errors.description} sx={fieldSx}
+                />
+              </Grid>
 
-            {/* Photo Upload */}
-            <Grid size={{ xs: 12 }}>
-              <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
-                Upload Photos (1–10 required)
-              </Typography>
-              <Button component="label" variant="outlined" startIcon={<CloudUploadIcon />}>
-                Choose Photos
-                <input type="file" hidden multiple accept="image/*" onChange={handlePhotoUpload} />
-              </Button>
-              <Typography variant="caption" display="block" color="text.secondary" sx={{ mt: 0.5 }}>
-                {photos.length}/10 photos selected
-              </Typography>
-              {errors.photos && (
-                <Typography color="error" variant="caption" display="block" sx={{ mt: 0.5 }}>
-                  {errors.photos}
+              {/* Photo Upload */}
+              <Grid size={{ xs: 12 }}>
+                <Typography sx={{ fontFamily: monoFont, fontSize: 12, letterSpacing: 1, color: C.accent, mb: 1 }}>
+                  UPLOAD PHOTOS (3–10 REQUIRED)
                 </Typography>
-              )}
+                <Button
+                  component="label" variant="outlined" startIcon={<CloudUploadIcon />}
+                  sx={{ color: C.text, borderColor: C.border, borderRadius: "4px", "&:hover": { borderColor: C.accent, color: C.accent } }}
+                >
+                  Choose photos
+                  <input type="file" hidden multiple accept="image/*" onChange={handlePhotoUpload} />
+                </Button>
+                <Typography sx={{ fontSize: 12, color: C.textMuted, mt: 0.5 }}>
+                  {photos.length}/10 photos selected
+                </Typography>
+                {errors.photos && (
+                  <Typography sx={{ color: "#E28080", fontSize: 12, mt: 0.5 }}>
+                    {errors.photos}
+                  </Typography>
+                )}
 
-              <Grid container spacing={1} sx={{ mt: 2 }}>
-                {photos.map((file, index) => (
-                  <Grid key={index} size={{ xs: 3, sm: 2 }}>
-                    <Box sx={{ position: "relative" }}>
-                      <Box
-                        component="img"
-                        src={URL.createObjectURL(file)}
-                        alt={`upload-${index}`}
-                        sx={{ width: "100%", height: 80, objectFit: "cover", borderRadius: 1 }}
-                      />
-                      <IconButton
-                        size="small"
-                        onClick={() => removePhoto(index)}
-                        sx={{
-                          position: "absolute", top: -8, right: -8,
-                          bgcolor: "white", boxShadow: 1,
-                          "&:hover": { bgcolor: "error.light" },
-                        }}
-                      >
-                        <DeleteIcon fontSize="small" />
-                      </IconButton>
-                    </Box>
-                  </Grid>
-                ))}
+                <Grid container spacing={1} sx={{ mt: 2 }}>
+                  {photos.map((file, index) => (
+                    <Grid key={index} size={{ xs: 3, sm: 2 }}>
+                      <Box sx={{ position: "relative" }}>
+                        <Box
+                          component="img"
+                          src={URL.createObjectURL(file)}
+                          alt={`upload-${index}`}
+                          sx={{ width: "100%", height: 80, objectFit: "cover", borderRadius: "4px", border: `1px solid ${C.border}` }}
+                        />
+                        <IconButton
+                          size="small"
+                          onClick={() => removePhoto(index)}
+                          sx={{
+                            position: "absolute", top: -8, right: -8,
+                            bgcolor: C.surface2, border: `1px solid ${C.border}`,
+                            "&:hover": { bgcolor: "#3A1F1F", borderColor: "#E28080" },
+                          }}
+                        >
+                          <DeleteIcon fontSize="small" sx={{ color: "#E28080" }} />
+                        </IconButton>
+                      </Box>
+                    </Grid>
+                  ))}
+                </Grid>
+              </Grid>
+
+              <Grid size={{ xs: 12 }}>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  disabled={loading}
+                  startIcon={loading ? <CircularProgress size={16} sx={{ color: "#1A1300" }} /> : null}
+                  sx={{
+                    px: 4, py: 1.2, borderRadius: "4px", boxShadow: "none",
+                    bgcolor: C.accent, color: "#1A1300", fontWeight: 600,
+                    "&:hover": { bgcolor: C.accentDark, boxShadow: "none" },
+                    "&.Mui-disabled": { bgcolor: C.surface2, color: C.textMuted },
+                  }}
+                >
+                  {loading ? "Submitting..." : "Submit listing"}
+                </Button>
               </Grid>
             </Grid>
-
-           <Grid size={{ xs: 12 }}>
-           
-  <Button
-    type="submit"
-    variant="contained"
-    disabled={loading}
-    startIcon={loading ? <CircularProgress size={16} color="inherit" /> : null}
-    sx={{ px: 4, py: 1 }}
-  >
-    {loading ? "Submitting..." : "Submit Listing"}
-  </Button>
-</Grid>
-          </Grid>
-        </Box>
-      </Paper>
-    </Container>
+          </Box>
+        </Paper>
+      </Container>
+    </Box>
   );
 }
 

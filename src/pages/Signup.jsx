@@ -13,6 +13,29 @@ import DirectionsCarFilledIcon from "@mui/icons-material/DirectionsCarFilled";
 import { registerUser } from "../api/authApi";
 import { useAuth } from "../context/AuthContext";
 
+const C = {
+  bg: "#14161A",
+  surface: "#1C1F24",
+  surface2: "#23262C",
+  border: "#2C3036",
+  accent: "#C9922F",
+  accentDark: "#9C701E",
+  text: "#F1F1EE",
+  textMuted: "#9BA1A8",
+};
+const displayFont = `"Oswald", "Arial Narrow", sans-serif`;
+
+const fieldSx = {
+  "& .MuiInputBase-root": { color: C.text, bgcolor: C.surface2, borderRadius: "4px" },
+  "& .MuiInputLabel-root": { color: C.textMuted },
+  "& .MuiInputLabel-root.Mui-focused": { color: C.accent },
+  "& .MuiOutlinedInput-notchedOutline": { borderColor: C.border },
+  "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: C.accent },
+  "& .Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: C.accent },
+  "& .MuiFormHelperText-root": { color: C.textMuted },
+  "& .MuiSvgIcon-root": { color: C.textMuted },
+};
+
 function Signup() {
   const navigate = useNavigate();
   const { login } = useAuth();
@@ -66,7 +89,7 @@ function Signup() {
         minHeight: "calc(100vh - 64px)",
         display: "flex",
         alignItems: "center",
-        background: "linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #1e2d6e 100%)",
+        bgcolor: C.bg,
         position: "relative",
         overflow: "hidden",
         "&::before": {
@@ -74,8 +97,8 @@ function Signup() {
           position: "absolute",
           width: 500, height: 500,
           borderRadius: "50%",
-          background: "rgba(78,110,242,0.1)",
-          top: -150, right: -150,
+          background: "rgba(201,146,47,0.06)",
+          top: -170, right: -150,
         },
       }}
     >
@@ -84,32 +107,33 @@ function Signup() {
           elevation={0}
           sx={{
             p: { xs: 3, sm: 5 },
-            borderRadius: 4,
-            boxShadow: "0 24px 64px rgba(0,0,0,0.3)",
+            borderRadius: "6px",
+            bgcolor: C.surface,
+            border: `1px solid ${C.border}`,
           }}
         >
           <Box sx={{ textAlign: "center", mb: 4 }}>
             <Box
               sx={{
                 width: 56, height: 56,
-                bgcolor: "#4e6ef2",
-                borderRadius: 2.5,
+                border: `1px solid ${C.accent}`,
+                borderRadius: "6px",
                 display: "flex", alignItems: "center", justifyContent: "center",
                 mx: "auto", mb: 2,
               }}
             >
-              <DirectionsCarFilledIcon sx={{ color: "white", fontSize: 30 }} />
+              <DirectionsCarFilledIcon sx={{ color: C.accent, fontSize: 28 }} />
             </Box>
-            <Typography variant="h4" fontWeight={800} gutterBottom>
-              Create Account
+            <Typography sx={{ fontFamily: displayFont, fontWeight: 600, fontSize: 28, textTransform: "uppercase", color: C.text, mb: 0.5 }}>
+              Create account
             </Typography>
-            <Typography color="text.secondary">
+            <Typography sx={{ color: C.textMuted }}>
               Join CarBazaar to buy and sell cars
             </Typography>
           </Box>
 
           {serverError && (
-            <Alert severity="error" sx={{ mb: 3, borderRadius: 2 }} onClose={() => setServerError("")}>
+            <Alert severity="error" sx={{ mb: 3, borderRadius: "6px", bgcolor: "#3A1F1F", color: "#F1B4B4", border: "1px solid #5C2E2E" }} onClose={() => setServerError("")}>
               {serverError}
             </Alert>
           )}
@@ -117,8 +141,8 @@ function Signup() {
           <Box component="form" onSubmit={handleSubmit}>
             <TextField
               fullWidth
-              label="Full Name"
-              sx={{ mb: 3 }}
+              label="Full name"
+              sx={{ mb: 3, ...fieldSx }}
               value={form.name}
               onChange={handleChange("name")}
               error={!!errors.name}
@@ -126,7 +150,7 @@ function Signup() {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <PersonIcon sx={{ color: "text.secondary" }} />
+                    <PersonIcon sx={{ color: C.textMuted }} />
                   </InputAdornment>
                 ),
               }}
@@ -134,8 +158,8 @@ function Signup() {
 
             <TextField
               fullWidth
-              label="Email Address"
-              sx={{ mb: 3 }}
+              label="Email address"
+              sx={{ mb: 3, ...fieldSx }}
               value={form.email}
               onChange={handleChange("email")}
               error={!!errors.email}
@@ -143,7 +167,7 @@ function Signup() {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <EmailIcon sx={{ color: "text.secondary" }} />
+                    <EmailIcon sx={{ color: C.textMuted }} />
                   </InputAdornment>
                 ),
               }}
@@ -153,7 +177,7 @@ function Signup() {
               fullWidth
               label="Password"
               type={showPassword ? "text" : "password"}
-              sx={{ mb: 1 }}
+              sx={{ mb: 1, ...fieldSx }}
               value={form.password}
               onChange={handleChange("password")}
               error={!!errors.password}
@@ -161,13 +185,13 @@ function Signup() {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <LockIcon sx={{ color: "text.secondary" }} />
+                    <LockIcon sx={{ color: C.textMuted }} />
                   </InputAdornment>
                 ),
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton onClick={() => setShowPassword((prev) => !prev)} edge="end">
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                      {showPassword ? <VisibilityOff sx={{ color: C.textMuted }} /> : <Visibility sx={{ color: C.textMuted }} />}
                     </IconButton>
                   </InputAdornment>
                 ),
@@ -176,23 +200,27 @@ function Signup() {
 
             <Button
               type="submit"
-              variant="contained"
               fullWidth
               size="large"
               disabled={loading}
-              startIcon={loading ? <CircularProgress size={20} color="inherit" /> : null}
-              sx={{ mt: 3, py: 1.5, fontSize: "1rem" }}
+              startIcon={loading ? <CircularProgress size={20} sx={{ color: "#1A1300" }} /> : null}
+              sx={{
+                mt: 3, py: 1.5, fontSize: "1rem", borderRadius: "4px", boxShadow: "none",
+                bgcolor: C.accent, color: "#1A1300", fontWeight: 600,
+                "&:hover": { bgcolor: C.accentDark, boxShadow: "none" },
+                "&.Mui-disabled": { bgcolor: C.surface2, color: C.textMuted },
+              }}
             >
-              {loading ? "Creating Account..." : "Sign Up"}
+              {loading ? "Creating account..." : "Sign up"}
             </Button>
           </Box>
 
-          <Typography textAlign="center" sx={{ mt: 4 }} color="text.secondary">
+          <Typography textAlign="center" sx={{ mt: 4, color: C.textMuted }}>
             Already have an account?{" "}
             <Box
               component={Link}
               to="/login"
-              sx={{ color: "#4e6ef2", fontWeight: 700, textDecoration: "none" }}
+              sx={{ color: C.accent, fontWeight: 600, textDecoration: "none" }}
             >
               Login
             </Box>

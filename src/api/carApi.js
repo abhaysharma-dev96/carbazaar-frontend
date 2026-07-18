@@ -17,21 +17,32 @@ export const fetchCarById = async (id) => {
 
 // Create new car listing
 export const createCar = async (formData) => {
+  const token = JSON.parse(localStorage.getItem("carbazaar_user"))?.token;
   const { data } = await API.post("/cars", formData, {
-    headers: { "Content-Type": "multipart/form-data" },
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return data;
+};
+export const updateCar = async (id, formData) => {
+  const token = JSON.parse(localStorage.getItem("carbazaar_user"))?.token;
+  const { data } = await API.put(`/cars/${id}`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${token}`,
+    },
   });
   return data;
 };
 
-// Delete car
 export const deleteCar = async (id) => {
-  const { data } = await API.delete(`/cars/${id}`);
-  return data;
-};
-// Update car listing
-export const updateCar = async (id, formData) => {
-  const { data } = await API.put(`/cars/${id}`, formData, {
-    headers: { "Content-Type": "multipart/form-data" },
+  const token = JSON.parse(localStorage.getItem("carbazaar_user"))?.token;
+  const { data } = await API.delete(`/cars/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   });
   return data;
 };
