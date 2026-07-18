@@ -301,7 +301,7 @@ function Home() {
       </Box>
 
       {/* BRANDS MARQUEE */}
-      <Box sx={{ bgcolor: C.surface, py: 2.5, overflow: "hidden", borderBottom: `1px solid ${C.border}` }}>
+      {/* <Box sx={{ bgcolor: C.surface, py: 2.5, overflow: "hidden", borderBottom: `1px solid ${C.border}` }}>
         <Stack
           direction="row" spacing={4}
           sx={{
@@ -321,7 +321,7 @@ function Home() {
             </Typography>
           ))}
         </Stack>
-      </Box>
+      </Box> */}
 
       {/* STATS STRIP */}
       <Box sx={{ bgcolor: C.surface2, py: 4, borderBottom: `1px solid ${C.border}` }}>
